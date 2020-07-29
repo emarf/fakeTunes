@@ -5,19 +5,13 @@
 // export default videoPlayer;
 
 export const videoPlayerInit = () => {
-   // video-player
-   // video-button__play
-   // video-button__stop
-   // video-time__passed
-   // video-progress
-   // video-time__total
-
    const videoPlayer = document.querySelector('.video-player');
    const videoButtonPlay = document.querySelector('.video-button__play');
    const videoButtonStop = document.querySelector('.video-button__stop');
    const videoProgress = document.querySelector('.video-progress');
    const videoTimePassed = document.querySelector('.video-time__passed');
    const videoTimeTotal = document.querySelector('.video-time__total');
+   const videoVolume = document.querySelector('.video-volume');
 
    //change the icon of the video player
    const toggleIcon = () => {
@@ -86,5 +80,14 @@ export const videoPlayerInit = () => {
       //изменяем currentTime чтобы видео переключилось в нужный нам моент
       videoPlayer.currentTime = (value * duration) / 100;
    });
+
+   //add volume for our video player
+   videoVolume.addEventListener('input', () => {
+      //так как значение videoVolume изменяется от 0 до 100
+      //а здесь нам надо изменения от 0 до 1 производим вычисления
+      videoPlayer.volume = videoVolume.value / 100;
+   });
+   //set the initial value of volume
+   videoPlayer.volume = 0.3;
+   videoVolume.value = videoPlayer.volume * 100;
 };
-changed
