@@ -1,6 +1,7 @@
 import { addZero } from './supportScript.js';
 
 export const musicPlayerInit = () => {
+
    const audio = document.querySelector('.audio');
    const audioImg = document.querySelector('.audio-img');
    const audioHeader = document.querySelector('.audio-header');
@@ -11,6 +12,7 @@ export const musicPlayerInit = () => {
    const audioProgressTiming = document.querySelector('.audio-progress__timing');
    const audioTimePassed = document.querySelector('.audio-time__passed');
    const audioTimeTotal = document.querySelector('.audio-time__total');
+   const musicVolume = document.querySelector('.audio-volume');
 
    //create array with all music
    const playList = ['hello', 'flow', 'speed'];
@@ -36,7 +38,7 @@ export const musicPlayerInit = () => {
    }
 
    const prevTrack = () => {
-      if (trackIndex !== 0) {
+      if (trackIndex) {
          trackIndex--;
       } else {
          trackIndex = playList.length - 1;
@@ -112,4 +114,20 @@ export const musicPlayerInit = () => {
       //перезаписываем переменную чтобы timeupdate шел именно с этой секунды
       audioPlayer.currentTime = progress;
    });
-};
+
+   musicVolume.addEventListener('input', () => {
+      audioPlayer.volume = musicVolume.value / 100;
+   });
+
+   audioPlayer.volume = 0.3;
+   musicVolume.value = audioPlayer.volume * 100;
+
+   musicPlayerInit.stop = () => {
+      if (!audioPlayer.paused) {
+         audioPlayer.pause();
+         audio.classList.remove('play');
+         audioButtonPlay.classList.remove('fa-pause');
+         audioButtonPlay.classList.add('fa-play');
+      }
+   }
+}

@@ -674,3 +674,9 @@ input[type="range"]:focus::-ms-fill-upper {
 .radio-volume {
    max-width: 100px;
 }
+.audio-icon {
+   margin: 5px;
+}
+.audio-volume {
+   max-width: 100px;
+}
